@@ -31,6 +31,8 @@ try:
     2-Normal scan
     3-Basic scan
                   """))
+    isWant=input("You want scan results save the from file(yes/no) : ")
+
     if(Process == 1):
         for port in range(1, 65536):
             s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -39,13 +41,16 @@ try:
             try:
                 s.connect((Target,port))
                 banner=s.recv(1024)
-                print(f"[+] Port {port} açık - Banner: {banner.decode(errors='ignore')}")
+                print(f"[+] Port {port} open - Banner: {banner.decode(errors='ignore')}")
             except ConnectionRefusedError:
                 pass
             except Exception as e:
                 pass
             finally:
-                s.close() 
+                s.close()
+            if isWant.lower().lstrip() == "yes":
+                with open("SerptenScan_results","w") as file:
+                    file.write(f"[+] Port {port} open - Banner: {banner.decode(errors='ignore')}") 
         print("All port scanned")
     elif (Process == 2):
         for port in range(1, 1024):
@@ -55,13 +60,16 @@ try:
             try:
                 s.connect((Target,port))
                 banner=s.recv(1024)
-                print(f"[+] Port {port} açık - Banner: {banner.decode(errors='ignore')}")
+                print(f"[+] Port {port} open - Banner: {banner.decode(errors='ignore')}")
             except ConnectionRefusedError:
                 pass
             except Exception as e:
                 pass
             finally:
-                s.close() 
+                s.close()
+            if isWant.lower().lstrip() == "yes":
+                with open("SerptenScan_results","w") as file:
+                    file.write(f"[+] Port {port} open - Banner: {banner.decode(errors='ignore')}") 
         print("All port scanned")
     elif (Process == 3):
         for port in range(1, 256):
@@ -71,16 +79,20 @@ try:
             try:
                 s.connect((Target,port))
                 banner=s.recv(1024)
-                print(f"[+] Port {port} açık - Banner: {banner.decode(errors='ignore')}")
+                print(f"[+] Port {port} open - Banner: {banner.decode(errors='ignore')}")
             except ConnectionRefusedError:
                 pass
             except Exception as e:
                 pass
             finally:
-                s.close() 
-        print("All port scanned")
-
+                s.close()
+            if isWant.lower().lstrip() == "yes":
+                with open("SerptenScan_results","w") as file:
+                    file.write(f"[+] Port {port} open - Banner: {banner.decode(errors='ignore')}")
+        print("All port scanned")   
 except ValueError :
     print("You Entered wrong type ")
+
+
 
 
